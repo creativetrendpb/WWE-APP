@@ -1,5 +1,7 @@
 FROM nginx
-MAINTAINER prakash
+WORKDIR /myapp
 EXPOSE 80
-LABEL this is movie ticket application
-COPY . /usr/share/nginx/html/
+MAINTAINER prakash
+LABEL this is wwe app
+COPY index.html .
+
