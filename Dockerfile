@@ -3,5 +3,5 @@ WORKDIR /myapp
 EXPOSE 80
 MAINTAINER prakash
 LABEL this is wwe app
-COPY index.html .
+COPY index.html /usr/share/nginx/html/
 
