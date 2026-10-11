@@ -1,401 +1,402 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>WWE Superstars · Roster Cards</title>
-    <!-- Google Font for a bold, wrestling feel -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Anton&family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Animal Sound Board</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
 
-        body {
-            background: linear-gradient(145deg, #0b0c10 0%, #1a1e2b 100%);
-            font-family: 'Inter', sans-serif;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            min-height: 100vh;
-            padding: 3rem 1.5rem;
-        }
+    body {
+      min-height: 100vh;
+      font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+      background: linear-gradient(160deg, #2d5a27 0%, #4a8b3a 45%, #87c76b 100%);
+      padding: 2rem 1.5rem 3rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      overflow-x: hidden;
+    }
 
-        /* main title – raw wrestling energy */
-        .header {
-            text-align: center;
-            margin-bottom: 3rem;
-        }
+    header {
+      text-align: center;
+      margin-bottom: 2.5rem;
+      position: relative;
+      z-index: 2;
+    }
 
-        .header h1 {
-            font-family: 'Anton', sans-serif;
-            font-size: 4.5rem;
-            letter-spacing: 5px;
-            text-transform: uppercase;
-            color: #e31b23;
-            text-shadow: 0 0 15px #b30000, 0 4px 10px rgba(0, 0, 0, 0.8);
-            line-height: 1;
-        }
+    header h1 {
+      font-size: 2.8rem;
+      font-weight: 900;
+      color: #ffffff;
+      letter-spacing: 2px;
+      text-shadow: 0 4px 12px rgba(0, 40, 0, 0.5), 0 0 25px #d4ffb0;
+      margin-bottom: 0.4rem;
+    }
 
-        .header h1 span {
-            display: inline-block;
-            color: #f5c542;
-            text-shadow: 0 0 15px #b38f00;
-        }
+    header p {
+      color: #eaffd9;
+      font-size: 1rem;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      font-weight: 600;
+      opacity: 0.9;
+    }
 
-        .header p {
-            color: #bbb;
-            font-weight: 600;
-            letter-spacing: 3px;
-            margin-top: 8px;
-            font-size: 1.1rem;
-            text-transform: uppercase;
-            border-top: 2px solid #e31b23;
-            border-bottom: 2px solid #e31b23;
-            padding: 8px 0;
-            display: inline-block;
-            background: rgba(0, 0, 0, 0.5);
-            padding-left: 20px;
-            padding-right: 20px;
-        }
+    /* grid of animal cards */
+    .sound-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+      gap: 1.4rem;
+      max-width: 1100px;
+      width: 100%;
+      position: relative;
+      z-index: 2;
+    }
 
-        /* superstar grid */
-        .roster-grid {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            gap: 2rem 1.8rem;
-            max-width: 1400px;
-            margin: 0 auto;
-        }
+    .animal-card {
+      background: rgba(255, 255, 255, 0.15);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      border: 2px solid rgba(255, 255, 255, 0.4);
+      border-radius: 26px;
+      padding: 1.5rem 1rem 1.2rem;
+      text-align: center;
+      cursor: pointer;
+      transition: transform 0.2s ease, box-shadow 0.25s ease, border-color 0.2s;
+      box-shadow: 0 10px 25px rgba(0, 30, 0, 0.3);
+      user-select: none;
+      position: relative;
+      overflow: hidden;
+    }
 
-        /* superstar card – bold, shiny, with a subtle glow */
-        .superstar-card {
-            background: #141824;
-            background-image: radial-gradient(circle at 20% 10%, #2f3548 0%, #0e1018 90%);
-            width: 280px;
-            border-radius: 30px 30px 20px 20px;
-            border: 2px solid #3d4359;
-            box-shadow: 0 15px 25px rgba(0, 0, 0, 0.8), 0 0 0 1px #e31b23 inset, 0 0 15px rgba(227, 27, 35, 0.3);
-            overflow: hidden;
-            transition: transform 0.25s ease, box-shadow 0.3s ease, border-color 0.2s;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            padding: 1.8rem 0.8rem 1.6rem;
-            position: relative;
-        }
+    .animal-card:hover {
+      transform: translateY(-8px) scale(1.03);
+      border-color: #ffe066;
+      box-shadow: 0 18px 35px rgba(0, 30, 0, 0.45), 0 0 25px rgba(255, 224, 102, 0.5);
+    }
 
-        /* glow accent on hover – like an entrance theme */
-        .superstar-card:hover {
-            transform: translateY(-10px) scale(1.02);
-            border-color: #f5c542;
-            box-shadow: 0 25px 35px rgba(0, 0, 0, 0.9), 0 0 0 2px #f5c542 inset, 0 0 30px #e31b23;
-        }
+    .animal-card:active {
+      transform: translateY(-2px) scale(0.98);
+    }
 
-        /* superstar "portrait" – stylized avatar */
-        .superstar-avatar {
-            width: 130px;
-            height: 130px;
-            border-radius: 50%;
-            background: linear-gradient(135deg, #2a2f40, #0a0c12);
-            border: 4px solid #e31b23;
-            box-shadow: 0 0 0 3px #1e1f2b, 0 0 25px #e31b23;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 4.2rem;
-            font-weight: 800;
-            font-family: 'Anton', sans-serif;
-            color: #f5c542;
-            text-shadow: 2px 2px 0 #7a0000;
-            margin-bottom: 1rem;
-            transition: border-color 0.2s;
-        }
+    /* playing state */
+    .animal-card.playing {
+      animation: shake 0.5s ease;
+      border-color: #ffe066;
+      box-shadow: 0 0 35px #ffe066, 0 0 60px rgba(255, 224, 102, 0.6);
+    }
 
-        .superstar-card:hover .superstar-avatar {
-            border-color: #f5c542;
-            box-shadow: 0 0 0 3px #2b1f00, 0 0 35px #f5c542;
-        }
+    @keyframes shake {
+      0%, 100% { transform: translateY(-8px) scale(1.03) rotate(0deg); }
+      25% { transform: translateY(-8px) scale(1.03) rotate(-3deg); }
+      75% { transform: translateY(-8px) scale(1.03) rotate(3deg); }
+    }
 
-        /* superstar name */
-        .superstar-name {
-            font-family: 'Anton', sans-serif;
-            font-size: 1.9rem;
-            letter-spacing: 2px;
-            text-transform: uppercase;
-            color: #ffffff;
-            margin: 0.2rem 0 0.15rem;
-            text-align: center;
-            line-height: 1.2;
-            text-shadow: 0 2px 5px black, 0 0 10px #e31b23;
-            word-break: break-word;
-            width: 100%;
-            padding: 0 5px;
-        }
+    .animal-emoji {
+      font-size: 3.6rem;
+      line-height: 1;
+      display: block;
+      margin-bottom: 0.6rem;
+      filter: drop-shadow(0 4px 6px rgba(0, 0, 0, 0.3));
+      transition: transform 0.2s;
+    }
 
-        /* nickname / brand */
-        .superstar-nick {
-            font-size: 0.9rem;
-            font-weight: 700;
-            letter-spacing: 2px;
-            text-transform: uppercase;
-            color: #f5c542;
-            background: rgba(227, 27, 35, 0.2);
-            padding: 0.25rem 1rem;
-            border-radius: 20px;
-            margin: 0.5rem 0 0.8rem;
-            border: 1px solid #e31b23;
-            box-shadow: 0 0 8px #e31b2360;
-            text-align: center;
-        }
+    .animal-card:hover .animal-emoji {
+      transform: scale(1.15) rotate(-5deg);
+    }
 
-        /* brand tag (Raw / SmackDown / NXT) */
-        .brand-tag {
-            font-size: 0.75rem;
-            font-weight: 800;
-            padding: 0.25rem 1.2rem;
-            border-radius: 30px;
-            background: #1e1f2b;
-            color: #ddd;
-            letter-spacing: 1.5px;
-            text-transform: uppercase;
-            border: 1px solid #3d4359;
-            margin-top: 0.2rem;
-            transition: 0.2s;
-        }
+    .animal-name {
+      font-size: 1.15rem;
+      font-weight: 800;
+      color: #ffffff;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      text-shadow: 0 2px 6px rgba(0, 0, 0, 0.4);
+      margin-bottom: 0.3rem;
+    }
 
-        .superstar-card:hover .brand-tag {
-            background: #e31b23;
-            color: #fff;
-            border-color: #f5c542;
-        }
+    .animal-sound {
+      font-size: 0.8rem;
+      font-weight: 600;
+      color: #eaffd9;
+      font-style: italic;
+      letter-spacing: 0.5px;
+      opacity: 0.9;
+    }
 
-        /* subtle footer – like a finisher */
-        .finisher {
-            margin-top: 1rem;
-            font-size: 0.7rem;
-            font-weight: 600;
-            letter-spacing: 1px;
-            color: #8a8f9e;
-            text-transform: uppercase;
-            border-top: 1px dashed #3d4359;
-            padding-top: 0.7rem;
-            width: 80%;
-            text-align: center;
-        }
+    /* small sound-wave indicator */
+    .wave {
+      display: inline-flex;
+      gap: 3px;
+      align-items: flex-end;
+      height: 16px;
+      margin-top: 0.6rem;
+      opacity: 0;
+      transition: opacity 0.2s;
+    }
 
-        /* championship belt accent – optional */
-        .champ-belt {
-            position: absolute;
-            top: 12px;
-            right: 18px;
-            font-size: 1.5rem;
-            filter: drop-shadow(0 0 8px gold);
-            opacity: 0.9;
-        }
+    .animal-card.playing .wave,
+    .animal-card:hover .wave {
+      opacity: 1;
+    }
 
-        /* responsiveness */
-        @media (max-width: 700px) {
-            .header h1 {
-                font-size: 2.8rem;
-                letter-spacing: 3px;
-            }
-            .header p {
-                font-size: 0.9rem;
-                letter-spacing: 2px;
-            }
-            .superstar-card {
-                width: 240px;
-                padding: 1.2rem 0.5rem 1.2rem;
-            }
-            .superstar-avatar {
-                width: 100px;
-                height: 100px;
-                font-size: 3.2rem;
-            }
-            .superstar-name {
-                font-size: 1.6rem;
-            }
-        }
+    .wave span {
+      width: 3px;
+      background: #ffe066;
+      border-radius: 3px;
+      animation: wave 0.9s ease-in-out infinite;
+    }
 
-        @media (max-width: 520px) {
-            .roster-grid {
-                gap: 1.5rem;
-            }
-            .superstar-card {
-                width: 100%;
-                max-width: 280px;
-            }
-        }
+    .wave span:nth-child(1) { height: 6px; animation-delay: 0s; }
+    .wave span:nth-child(2) { height: 14px; animation-delay: 0.15s; }
+    .wave span:nth-child(3) { height: 9px; animation-delay: 0.3s; }
+    .wave span:nth-child(4) { height: 16px; animation-delay: 0.45s; }
+    .wave span:nth-child(5) { height: 7px; animation-delay: 0.6s; }
 
-        /* raw/smackdown/nxt specific color hints */
-        .brand-raw .superstar-nick {
-            color: #e31b23;
-            border-color: #e31b23;
-        }
+    @keyframes wave {
+      0%, 100% { transform: scaleY(1); }
+      50% { transform: scaleY(0.3); }
+    }
 
-        .brand-smackdown .superstar-nick {
-            color: #1e90ff;
-            border-color: #1e90ff;
-            background: rgba(30, 144, 255, 0.15);
-        }
+    /* footer hint */
+    .hint {
+      margin-top: 2.5rem;
+      color: #eaffd9;
+      font-size: 0.85rem;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      font-weight: 600;
+      opacity: 0.85;
+      text-align: center;
+      position: relative;
+      z-index: 2;
+      text-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+    }
 
-        .brand-nxt .superstar-nick {
-            color: #f5c542;
-            border-color: #f5c542;
-            background: rgba(245, 197, 66, 0.12);
-        }
+    /* floating leaves background */
+    .leaf {
+      position: fixed;
+      font-size: 1.8rem;
+      opacity: 0.18;
+      animation: float 18s infinite linear;
+      pointer-events: none;
+      z-index: 0;
+    }
 
-        /* small additional flair */
-        .superstar-card::after {
-            content: "";
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 100%;
-            height: 6px;
-            background: linear-gradient(90deg, #e31b23, #f5c542, #e31b23);
-            opacity: 0.7;
-            transition: height 0.2s;
-        }
+    @keyframes float {
+      0%   { transform: translateY(0) rotate(0deg); }
+      100% { transform: translateY(-110vh) rotate(360deg); }
+    }
 
-        .superstar-card:hover::after {
-            height: 10px;
-            opacity: 1;
-        }
-    </style>
+    @media (max-width: 500px) {
+      header h1 { font-size: 2rem; }
+      header p { font-size: 0.8rem; letter-spacing: 2px; }
+      .sound-grid { grid-template-columns: repeat(auto-fit, minmax(130px, 1fr)); gap: 1rem; }
+      .animal-emoji { font-size: 2.8rem; }
+      .animal-name { font-size: 0.95rem; }
+    }
+  </style>
 </head>
 <body>
 
-    <div class="header">
-        <h1>WWE <span>SUPERSTARS</span></h1>
-        <p>RAW · SMACKDOWN · NXT</p>
-    </div>
+  <!-- floating decorative leaves -->
+  <div class="leaf" style="left:5%; animation-duration:22s; animation-delay:0s;">🍃</div>
+  <div class="leaf" style="left:25%; animation-duration:19s; animation-delay:4s;">🌿</div>
+  <div class="leaf" style="left:55%; animation-duration:25s; animation-delay:2s;">🍂</div>
+  <div class="leaf" style="left:80%; animation-duration:20s; animation-delay:6s;">🍃</div>
+  <div class="leaf" style="left:92%; animation-duration:24s; animation-delay:3s;">🌿</div>
 
-    <!-- WWE Superstars roster – bold, iconic, larger than life -->
-    <div class="roster-grid">
+  <header>
+    <h1>🐾 Animal Sound Board 🐾</h1>
+    <p>Tap a card to hear the sound</p>
+  </header>
 
-        <!-- Roman Reigns -->
-        <div class="superstar-card brand-smackdown">
-            <div class="champ-belt">🏆</div>
-            <div class="superstar-avatar">RR</div>
-            <div class="superstar-name">Roman Reigns</div>
-            <div class="superstar-nick">Tribal Chief</div>
-            <div class="brand-tag">SmackDown</div>
-            <div class="finisher">Spear</div>
-        </div>
+  <div class="sound-grid" id="soundGrid">
+    <!-- cards are generated by JavaScript -->
+  </div>
 
-        <!-- Cody Rhodes -->
-        <div class="superstar-card brand-raw">
-            <div class="superstar-avatar">CR</div>
-            <div class="superstar-name">Cody Rhodes</div>
-            <div class="superstar-nick">American Nightmare</div>
-            <div class="brand-tag">Raw</div>
-            <div class="finisher">Cross Rhodes</div>
-        </div>
+  <div class="hint">🔊 Turn up your volume · Click &amp; listen!</div>
 
-        <!-- Seth Rollins -->
-        <div class="superstar-card brand-raw">
-            <div class="superstar-avatar">SR</div>
-            <div class="superstar-name">Seth Rollins</div>
-            <div class="superstar-nick">Visionary</div>
-            <div class="brand-tag">Raw</div>
-            <div class="finisher">Curb Stomp</div>
-        </div>
+  <script>
+    (function() {
+      // ------------------------------------------------------------
+      // Animal data: name, emoji, sound spelling, and speech synthesis
+      // description + frequency/tone parameters for the fallback beep.
+      // ------------------------------------------------------------
+      const animals = [
+        { name: "Dog",     emoji: "🐶", sound: "Woof! Woof!",       speak: "Woof woof",     freq: 380, type: "sine" },
+        { name: "Cat",     emoji: "🐱", sound: "Meow!",             speak: "Meow",          freq: 620, type: "sine" },
+        { name: "Cow",     emoji: "🐮", sound: "Moo!",              speak: "Moo",           freq: 180, type: "sine" },
+        { name: "Pig",     emoji: "🐷", sound: "Oink! Oink!",       speak: "Oink oink",     freq: 340, type: "square" },
+        { name: "Sheep",   emoji: "🐑", sound: "Baa!",              speak: "Baa",           freq: 440, type: "sine" },
+        { name: "Horse",   emoji: "🐴", sound: "Neigh!",            speak: "Neigh",         freq: 300, type: "sawtooth" },
+        { name: "Lion",    emoji: "🦁", sound: "Roar!",             speak: "Roar",          freq: 140, type: "sawtooth" },
+        { name: "Tiger",   emoji: "🐯", sound: "Grrrrowl!",         speak: "Growl",         freq: 120, type: "sawtooth" },
+        { name: "Elephant",emoji: "🐘", sound: "Paawooo!",          speak: "Pawoo",         freq: 100, type: "sine" },
+        { name: "Monkey",  emoji: "🐵", sound: "Ooh ooh ah ah!",    speak: "Ooh ooh ah ah", freq: 700, type: "sine" },
+        { name: "Wolf",    emoji: "🐺", sound: "Awoooooo!",         speak: "Awooo",         freq: 250, type: "sine" },
+        { name: "Fox",     emoji: "🦊", sound: "Yip! Yip!",         speak: "Yip yip",       freq: 800, type: "sine" },
+        { name: "Bear",    emoji: "🐻", sound: "Grrrr!",            speak: "Grrr",          freq: 110, type: "sawtooth" },
+        { name: "Frog",    emoji: "🐸", sound: "Ribbit! Ribbit!",   speak: "Ribbit ribbit", freq: 500, type: "square" },
+        { name: "Duck",    emoji: "🦆", sound: "Quack! Quack!",     speak: "Quack quack",   freq: 560, type: "square" },
+        { name: "Chicken", emoji: "🐔", sound: "Cluck! Cluck!",     speak: "Cluck cluck",   freq: 680, type: "square" },
+        { name: "Rooster", emoji: "🐓", sound: "Cock-a-doodle-doo!",speak:"Cock a doodle doo",freq:720,type:"sawtooth" },
+        { name: "Bird",    emoji: "🐦", sound: "Tweet! Tweet!",     speak: "Tweet tweet",   freq: 900, type: "sine" },
+        { name: "Owl",     emoji: "🦉", sound: "Hoot! Hoot!",       speak: "Hoot hoot",     freq: 350, type: "sine" },
+        { name: "Bee",     emoji: "🐝", sound: "Bzzzzz!",           speak: "Buzz",          freq: 480, type: "sawtooth" },
+        { name: "Snake",   emoji: "🐍", sound: "Hisssss!",          speak: "Hisss",         freq: 750, type: "sawtooth" },
+        { name: "Mouse",   emoji: "🐭", sound: "Squeak! Squeak!",   speak: "Squeak squeak", freq: 950, type: "sine" },
+        { name: "Rabbit",  emoji: "🐰", sound: "Thump! Thump!",     speak: "Thump",         freq: 200, type: "square" },
+        { name: "Whale",   emoji: "🐳", sound: "Woooooo!",          speak: "Wooo",          freq: 80,  type: "sine" },
+        { name: "Dolphin", emoji: "🐬", sound: "Eee-eee!",          speak: "Eee eee",       freq: 1100,type: "sine" },
+        { name: "Penguin", emoji: "🐧", sound: "Squawk!",           speak: "Squawk",        freq: 600, type: "sawtooth" },
+        { name: "Cricket", emoji: "🦗", sound: "Chirp! Chirp!",     speak: "Chirp chirp",   freq: 1000,type: "square" },
+        { name: "Goat",    emoji: "🐐", sound: "Maaaaa!",           speak: "Maaa",          freq: 420, type: "sawtooth" }
+      ];
 
-        <!-- Becky Lynch -->
-        <div class="superstar-card brand-raw">
-            <div class="superstar-avatar">BL</div>
-            <div class="superstar-name">Becky Lynch</div>
-            <div class="superstar-nick">The Man</div>
-            <div class="brand-tag">Raw</div>
-            <div class="finisher">Manhandle Slam</div>
-        </div>
+      // ------------------------------------------------------------
+      // Audio context for the fallback tone beep
+      // ------------------------------------------------------------
+      let audioCtx = null;
 
-        <!-- Bianca Belair -->
-        <div class="superstar-card brand-smackdown">
-            <div class="superstar-avatar">BB</div>
-            <div class="superstar-name">Bianca Belair</div>
-            <div class="superstar-nick">EST</div>
-            <div class="brand-tag">SmackDown</div>
-            <div class="finisher">KOD</div>
-        </div>
+      function getAudioContext() {
+        if (!audioCtx) {
+          const AC = window.AudioContext || window.webkitAudioContext;
+          if (AC) audioCtx = new AC();
+        }
+        return audioCtx;
+      }
 
-        <!-- Rhea Ripley -->
-        <div class="superstar-card brand-raw">
-            <div class="superstar-avatar">RR</div>
-            <div class="superstar-name">Rhea Ripley</div>
-            <div class="superstar-nick">Mami</div>
-            <div class="brand-tag">Raw</div>
-            <div class="finisher">Riptide</div>
-        </div>
+      // Play a short tone as a fallback "sound effect"
+      function playTone(freq, type = "sine", duration = 0.35) {
+        const ctx = getAudioContext();
+        if (!ctx) return;
 
-        <!-- Drew McIntyre -->
-        <div class="superstar-card brand-raw">
-            <div class="superstar-avatar">DM</div>
-            <div class="superstar-name">Drew McIntyre</div>
-            <div class="superstar-nick">Scottish Warrior</div>
-            <div class="brand-tag">Raw</div>
-            <div class="finisher">Claymore</div>
-        </div>
+        // resume if suspended (browser autoplay policy)
+        if (ctx.state === "suspended") ctx.resume();
 
-        <!-- Charlotte Flair -->
-        <div class="superstar-card brand-smackdown">
-            <div class="superstar-avatar">CF</div>
-            <div class="superstar-name">Charlotte Flair</div>
-            <div class="superstar-nick">The Queen</div>
-            <div class="brand-tag">SmackDown</div>
-            <div class="finisher">Figure Eight</div>
-        </div>
+        const osc = ctx.createOscillator();
+        const gain = ctx.createGain();
 
-        <!-- LA Knight -->
-        <div class="superstar-card brand-smackdown">
-            <div class="superstar-avatar">LK</div>
-            <div class="superstar-name">LA Knight</div>
-            <div class="superstar-nick">Megastar</div>
-            <div class="brand-tag">SmackDown</div>
-            <div class="finisher">BFT</div>
-        </div>
+        osc.type = type;
+        osc.frequency.value = freq;
 
-        <!-- Trick Williams (NXT) -->
-        <div class="superstar-card brand-nxt">
-            <div class="superstar-avatar">TW</div>
-            <div class="superstar-name">Trick Williams</div>
-            <div class="superstar-nick">Whoop That Trick</div>
-            <div class="brand-tag">NXT</div>
-            <div class="finisher">Trick Shot</div>
-        </div>
+        const now = ctx.currentTime;
+        gain.gain.setValueAtTime(0.0001, now);
+        gain.gain.exponentialRampToValueAtTime(0.25, now + 0.03);
+        gain.gain.exponentialRampToValueAtTime(0.0001, now + duration);
 
-        <!-- Roxanne Perez (NXT) -->
-        <div class="superstar-card brand-nxt">
-            <div class="superstar-avatar">RP</div>
-            <div class="superstar-name">Roxanne Perez</div>
-            <div class="superstar-nick">The Prodigy</div>
-            <div class="brand-tag">NXT</div>
-            <div class="finisher">Pop Rox</div>
-        </div>
+        osc.connect(gain);
+        gain.connect(ctx.destination);
+        osc.start(now);
+        osc.stop(now + duration + 0.05);
+      }
 
-        <!-- Gunther -->
-        <div class="superstar-card brand-smackdown">
-            <div class="superstar-avatar">G</div>
-            <div class="superstar-name">Gunther</div>
-            <div class="superstar-nick">Ring General</div>
-            <div class="brand-tag">SmackDown</div>
-            <div class="finisher">Powerbomb</div>
-        </div>
+      // ------------------------------------------------------------
+      // Speech synthesis: speak the animal sound aloud
+      // ------------------------------------------------------------
+      function speakSound(text) {
+        if (!("speechSynthesis" in window)) return false;
 
-    </div>
+        try {
+          window.speechSynthesis.cancel(); // stop any ongoing speech
 
-    <!-- subtle footer note -->
-    <div style="margin-top: 2.5rem; color: #444b5a; font-size: 0.7rem; letter-spacing: 2px; text-transform: uppercase; border-top: 1px solid #2a2f3a; padding-top: 1.5rem; width: 100%; text-align: center;">
-        ⚡ Then. Now. Forever. ⚡
-    </div>
+          const utter = new SpeechSynthesisUtterance(text);
+          utter.rate = 0.9;      // slightly slower = clearer
+          utter.pitch = 1.3;     // higher pitch = playful
+          utter.volume = 1;
+          utter.lang = "en-US";
 
+          // pick an English voice if available
+          const voices = window.speechSynthesis.getVoices();
+          const enVoice = voices.find(v => v.lang && v.lang.startsWith("en"));
+          if (enVoice) utter.voice = enVoice;
+
+          window.speechSynthesis.speak(utter);
+          return true;
+        } catch (e) {
+          return false;
+        }
+      }
+
+      // ------------------------------------------------------------
+      // Build the cards
+      // ------------------------------------------------------------
+      const grid = document.getElementById("soundGrid");
+
+      animals.forEach(animal => {
+        const card = document.createElement("div");
+        card.className = "animal-card";
+        card.setAttribute("role", "button");
+        card.setAttribute("tabindex", "0");
+        card.setAttribute("aria-label", `${animal.name}: ${animal.sound}`);
+
+        card.innerHTML = `
+          <span class="animal-emoji">${animal.emoji}</span>
+          <div class="animal-name">${animal.name}</div>
+          <div class="animal-sound">"${animal.sound}"</div>
+          <div class="wave">
+            <span></span><span></span><span></span><span></span><span></span>
+          </div>
+        `;
+
+        // play handler
+        const playSound = () => {
+          // visual feedback
+          card.classList.add("playing");
+          setTimeout(() => card.classList.remove("playing"), 700);
+
+          // 1) Try speech synthesis first (real words, more fun)
+          const spoke = speakSound(animal.speak);
+
+          // 2) Always play a tone as the "sound effect" too,
+          //    or as a fallback if speech isn't supported
+          const freq = animal.freq;
+          const type = animal.type;
+          if (spoke) {
+            // speech worked: play a quick supporting tone
+            setTimeout(() => playTone(freq, type, 0.25), 120);
+          } else {
+            // no speech: play a longer tone so there's definitely audio
+            playTone(freq, type, 0.5);
+          }
+        };
+
+        card.addEventListener("click", playSound);
+
+        // keyboard accessibility
+        card.addEventListener("keydown", (e) => {
+          if (e.key === "Enter" || e.key === " ") {
+            e.preventDefault();
+            playSound();
+          }
+        });
+
+        grid.appendChild(card);
+      });
+
+      // ------------------------------------------------------------
+      // Pre-load voices (some browsers load them async)
+      // ------------------------------------------------------------
+      if ("speechSynthesis" in window) {
+        window.speechSynthesis.getVoices();
+        window.speechSynthesis.onvoiceschanged = () => {
+          window.speechSynthesis.getVoices();
+        };
+      }
+
+      // Unlock audio context on first user interaction (browser policy)
+      document.body.addEventListener("click", () => {
+        const ctx = getAudioContext();
+        if (ctx && ctx.state === "suspended") ctx.resume();
+      }, { once: true });
+
+    })();
+  </script>
 </body>
 </html>
